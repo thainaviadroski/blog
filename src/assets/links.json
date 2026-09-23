@@ -1,6 +1,22 @@
 [
   {
     "title": "Testando Loader.",
+    "description": "Post de teste para validar o carregamento de conteúdo do blog.",
+    "images": [],
+    "slug": "testando-loader",
+    "name": "java",
+    "detail": "node-api",
+    "dir": "assets/java",
+    "tags": [
+      "node",
+      "programação",
+      "oop"
+    ],
+    "date": "2026-01-10"
+  },
+  {
+    "title": "Testando Loader.",
+    "description": "Post de teste para validar o carregamento de conteúdo do blog.",
     "images": [],
     "slug": "testando-loader",
     "name": "java",
@@ -10,6 +26,7 @@
       "java",
       "programação",
       "oop"
-    ]
+    ],
+    "date": "2026-01-10"
   }
 ]

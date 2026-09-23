@@ -2,8 +2,22 @@
 
 <div class="container">
 	<div class="wrapper-post">
-		@for (post of posts; track post.slug) {
+		@for (post of pagedPosts; track post.slug) {
 		<app-post [post]="post"></app-post>
 		}
 	</div>
+
+	@if (totalPages > 1) {
+	<nav class="pagination">
+		<button class="pagination-btn" [disabled]="currentPage === 1" (click)="goToPage(currentPage - 1)">
+			← Anterior
+		</button>
+
+		<span class="pagination-info">Página {{currentPage}} de {{totalPages}}</span>
+
+		<button class="pagination-btn" [disabled]="currentPage === totalPages" (click)="goToPage(currentPage + 1)">
+			Próxima →
+		</button>
+	</nav>
+	}
 </div>

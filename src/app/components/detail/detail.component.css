@@ -1,9 +1,43 @@
-.content {
-	margin-top: 10px;
-	border: 1px solid #ccc;
+.container{
+	max-width: 800px;
+	margin: 10px auto;
+	padding: 0 12px;
+}
+
+.post-cover{
+	width: 100%;
+	max-height: 400px;
+	object-fit: cover;
+	border-radius: 8px;
+	margin-top: 12px;
+}
+
+.post-date{
+	color: var(--muted-color);
+	font-size: 0.9em;
+	margin-top: 12px;
+}
+
+.post-tags-wrapper{
 	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	align-items: center;
-	gap: 20px;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 12px;
+	margin: 12px 0;
+}
+
+.post-tags{
+	border-radius: 10px;
+	background-color: var(--tag-bg);
+	color: var(--tag-color);
+	padding: 8px;
+}
+
+.content{
+	line-height: 1.6;
+}
+
+.not-found{
+	text-align: center;
+	margin-top: 40px;
 }

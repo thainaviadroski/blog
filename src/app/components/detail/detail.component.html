@@ -1,5 +1,18 @@
+<app-header></app-header>
+
 <div class="container">
-	<div class="content">
-		{{html}}
+	@if (notFound) {
+	<p class="not-found">Post não encontrado.</p>
+	} @else if (post) {
+	@if (post.img) {
+	<img class="post-cover" [src]="post.dir + '/' + post.img" [alt]="post.title">
+	}
+	<div class="post-date">{{post.date}}</div>
+	<div class="post-tags-wrapper">
+		@for (tag of post.tags; track $index) {
+		<span class="post-tags">{{tag}}</span>
+		}
 	</div>
+	<div class="content" [innerHTML]="html"></div>
+	}
 </div>

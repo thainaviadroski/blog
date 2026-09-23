@@ -1,10 +1,20 @@
 <div class="post-wrapper">
-	<h1 class="post-title">
-		{{post?.title}}
-	</h1>
+	@if (post?.img) {
+	<a [routerLink]="['/post', post?.slug]">
+		<img class="post-thumb" [src]="post?.dir + '/' + post?.img" [alt]="post?.title">
+	</a>
+	}
+	<a class="post-link" [routerLink]="['/post', post?.slug]">
+		<h1 class="post-title">
+			{{post?.title}}
+		</h1>
+	</a>
+	<div class="post-date">
+		{{post?.date}}
+	</div>
 	<div class="post-abstract">
 		<p>
-
+			{{post?.description}}
 		</p>
 	</div>
 	<div class="post-tags-wrapper">
@@ -14,4 +24,5 @@
 		</span>
 		}
 	</div>
+	<a class="post-read-more" [routerLink]="['/post', post?.slug]">Ler mais →</a>
 </div>

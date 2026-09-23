@@ -25,6 +25,9 @@ function getMarkdownFiles(dir) {
 
 			const content = fs.readFileSync(pathFile, "utf-8");
 			const tags = getTags(content);
+			const date = getDate(content);
+			const description = getDescription(content);
+			const img = getImg(content);
 
 			const firstLine = content
 				.split("\n")[0]
@@ -35,17 +38,23 @@ function getMarkdownFiles(dir) {
 
 			const data = {
 				title: firstLine,
+				description: description,
 				images: images,
 				slug: getSlug(firstLine),
 				...propsFile,
 				tags: tags,
+				date: date,
 			};
+
+			if (img) {
+				data.img = img;
+			}
 
 			filesList.push(data);
 		}
 	});
 
-	return filesList;
+	return filesList.sort((a, b) => b.date.localeCompare(a.date));
 }
 
 function getPropsFile(relativePath, file) {
@@ -101,6 +110,42 @@ function getTags(content) {
 		.split(":")[1]
 		.split(",")
 		.map((tag) => tag.trim());
+}
+
+function getDate(content) {
+	const line = content.split("\n").find((line) => line.startsWith("date:"));
+
+	if (!line) {
+		throw new Error(
+			`Markdown file is missing a "date:" line (format: date: YYYY-MM-DD)`
+		);
+	}
+
+	return line.split(":").slice(1).join(":").trim();
+}
+
+function getDescription(content) {
+	const line = content
+		.split("\n")
+		.find((line) => line.startsWith("description:"));
+
+	if (!line) {
+		throw new Error(
+			`Markdown file is missing a "description:" line (a short summary shown on the post list)`
+		);
+	}
+
+	return line.split(":").slice(1).join(":").trim();
+}
+
+function getImg(content) {
+	const line = content.split("\n").find((line) => line.startsWith("img:"));
+
+	if (!line) {
+		return undefined;
+	}
+
+	return line.split(":").slice(1).join(":").trim();
 }
 
 function getSlug(title) {

@@ -1,11 +1,43 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
+:root {
+	--bg-color: #ffffff;
+	--text-color: #181818;
+	--header-bg: #eeeeee;
+	--link-color: #353535;
+	--link-hover-color: #181818;
+	--border-color: #747474;
+	--muted-color: #747474;
+	--tag-bg: #525252;
+	--tag-color: #ffffff;
+	--card-shadow: 0 0 10px #74747455;
+}
+
+:root[data-theme="dark"] {
+	--bg-color: #121212;
+	--text-color: #e4e4e4;
+	--header-bg: #1e1e1e;
+	--link-color: #e4e4e4;
+	--link-hover-color: #ffffff;
+	--border-color: #444444;
+	--muted-color: #a0a0a0;
+	--tag-bg: #333333;
+	--tag-color: #e4e4e4;
+	--card-shadow: 0 0 10px #00000088;
+}
+
 * {
 	padding: 0px;
 	margin: 0px;
 	box-sizing: border-box;
 	font-family: 'Source Code Pro';
+}
+
+body {
+	background-color: var(--bg-color);
+	color: var(--text-color);
+	transition: background-color 0.2s ease, color 0.2s ease;
 }
 
 .container {

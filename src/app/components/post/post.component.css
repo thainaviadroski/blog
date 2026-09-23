@@ -1,16 +1,40 @@
 .post-wrapper{
     border-radius: 8px;
-    border: 1px solid #747474;
+    border: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
 	max-width: 100%;
 	padding: 12px;
 	gap: 16px;
-	box-shadow: 0 0 10px #74747455;
+	box-shadow: var(--card-shadow);
+}
+
+.post-thumb{
+	width: 100%;
+	max-height: 220px;
+	object-fit: cover;
+	border-radius: 8px;
 }
 
 .post-title{
 	border-bottom: 1px solid;
+}
+
+.post-link{
+	text-decoration: none;
+	color: inherit;
+}
+
+.post-date{
+	color: var(--muted-color);
+	font-size: 0.9em;
+}
+
+.post-read-more{
+	align-self: flex-start;
+	color: inherit;
+	font-weight: bold;
+	text-decoration: none;
 }
 
 .post-tags-wrapper{
@@ -23,7 +47,7 @@
 
 .post-tags{
 	border-radius: 10px;
-	background-color: #525252;
-	color:#FFF;
+	background-color: var(--tag-bg);
+	color: var(--tag-color);
 	padding: 8px;
 }

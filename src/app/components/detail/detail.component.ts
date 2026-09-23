@@ -1,38 +1,64 @@
-import { Component, OnInit, SecurityContext } from '@angular/core';
-import { DomSanitizer } from '@angular/platform-browser';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { marked } from 'marked';
+import { switchMap } from 'rxjs/operators';
+import { ContentLoaderServiceService } from '../../service/content-loader-service.service';
+import { HeaderComponent } from '../header/header.component';
+import { Content } from '../../types/Content.model';
+
 @Component({
 	selector: 'app-detail',
 	standalone: true,
-	imports: [],
+	imports: [HeaderComponent],
 	templateUrl: './detail.component.html',
 	styleUrl: './detail.component.css'
 })
 export class DetailComponent implements OnInit {
 
-	html: string | null = "";
-	constructor(private sanitaizer: DomSanitizer) { }
+	post: Content | null = null;
+	html: string | null = null;
+	notFound = false;
+
+	constructor(
+		private route: ActivatedRoute,
+		private contentService: ContentLoaderServiceService
+	) { }
+
 	ngOnInit(): void {
-		console.log(this.getHtml()?.toString());
+		this.route.paramMap.pipe(
+			switchMap(params => {
+				const slug = params.get('slug');
+				return this.contentService.getAllContents().pipe(
+					switchMap(contents => {
+						const post = contents.find(content => content.slug === slug) ?? null;
+						this.post = post;
+
+						if (!post) {
+							return [null];
+						}
+
+						return this.contentService.getContent(`${post.dir}/${post.detail}.md`);
+					})
+				);
+			})
+		).subscribe(markdown => {
+			if (markdown === null) {
+				this.notFound = true;
+				return;
+			}
+
+			this.html = this.markdownToHtml(markdown);
+		});
 	}
 
+	private static readonly METADATA_PREFIXES = ['tags:', 'date:', 'description:', 'img:'];
 
-	content = "# Testando Loader\n\r" +
-		"afvoiao viofdjioaavaiodfva aafvaodfmoviadfvadfafd afdvafdvadfv\n\r" +
-		"afvoiao viofdjioaavaiodfva aafvaodfmoviadfvadfafd afdvafdvadfv\n\r" +
-		"afvoiao viofdjioaavaiodfva aafvaodfmoviadfvadfafd afdvafdvadfv\n\r" +
-		"afvoiao viofdjioaavaiodfva aafvaodfmoviadfvadfafd afdvafdvadfv\n\r" +
-		"tags: java, programação, oop";
-	//html = this.markdownToHtml();
+	private markdownToHtml(markdown: string): string {
+		const body = markdown
+			.split('\n')
+			.filter(line => !DetailComponent.METADATA_PREFIXES.some(prefix => line.startsWith(prefix)))
+			.join('\n');
 
-	// markdownToHtml() {
-	// 	let html = marked(this.content) as string;
-	// 	console.log(html);
-	// 	return html;
-	// }
-
-	getHtml() {
-		return this.sanitaizer.sanitize(SecurityContext.HTML, this.content);
-
+		return marked.parse(body, { async: false }) as string;
 	}
 }

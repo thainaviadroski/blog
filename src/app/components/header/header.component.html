@@ -6,6 +6,20 @@
 		<nav class="navbar">
 			<a href="" class="link">Home</a>
 			<a href="" class="link">About</a>
+			<div class="theme-switch">
+				<span class="theme-toggle-icon">🌙</span>
+				<button
+					type="button"
+					class="theme-toggle"
+					role="switch"
+					[attr.aria-checked]="themeService.theme() === 'dark'"
+					(click)="themeService.toggle()"
+					[attr.aria-label]="themeService.theme() === 'dark' ? 'Ativar modo claro' : 'Ativar modo escuro'"
+				>
+					<span class="theme-toggle-knob" [class.theme-toggle-knob--light]="themeService.theme() === 'light'"></span>
+				</button>
+				<span class="theme-toggle-icon">☀️</span>
+			</div>
 		</nav>
 	</div>
 </header>
