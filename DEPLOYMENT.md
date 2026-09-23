@@ -63,20 +63,31 @@ npm run build -- --configuration production --base-href /blog/
 npx http-server dist/my-blog/browser
 ```
 
-## Why hash-based routing (`/blog/#/post/slug`)
+## Clean URLs (`/blog/post/slug`, no `#`) via the 404.html trick
 
-GitHub Pages only serves static files — it has no way to redirect an arbitrary path like `/blog/post/some-slug` back to `index.html`, so a direct link or a page refresh on that URL would 404.
+Routing uses Angular's default path-based `PathLocationStrategy`, so URLs look like `/blog/post/some-slug` — no `#`.
 
-To avoid that, routing uses [`withHashLocation()`](src/app/app.config.ts) (Angular Router), so real URLs always look like `/blog/#/post/some-slug`. The browser only ever requests `/blog/` from the server — everything after `#` is handled client-side by Angular — so deep links and refreshes always work.
+The catch: GitHub Pages only serves static files, so it has no way to redirect an arbitrary path like `/blog/post/some-slug` back to `index.html` on its own — a direct link, bookmark, or page refresh on that URL would normally 404. This is solved with the well-known ["SPA GitHub Pages" trick](https://github.com/rafgraph/spa-github-pages), already wired up in this repo:
+
+1. **[src/404.html](src/404.html)** — GitHub Pages serves this for any unrecognized path. It encodes the real path into a query string (e.g. `/blog/post/some-slug` → `/blog/?/post/some-slug`) and redirects there.
+2. **[src/index.html](src/index.html)** — has an inline script that runs before Angular boots, decodes that query string, and uses `history.replaceState` to restore the real URL. The Angular Router then sees the correct path.
+3. **[angular.json](angular.json)** — `src/404.html` is listed under `build.options.assets`, so it gets copied to `dist/my-blog/browser/404.html` on every build (right where GitHub Pages expects a custom 404 page).
+
+You'll briefly see a 404 network request in the browser console on a cold hit to a deep link — that's expected and harmless; it's how the trick works, and the page corrects itself immediately.
+
+`pathSegmentsToKeep = 1` in `src/404.html` assumes the site is served at a one-segment sub-path (`/blog/...`). If the repo is renamed or moved (see below), that number may need to change too.
 
 ## If the repo is ever renamed or moved
 
-The base href (`/blog/`) is only set at build time via the `--base-href` flag — it's not hardcoded in `src/index.html`. If the repo name changes, or you move to a user page (`thainaviadroski.github.io`, served at the domain root), update the `--base-href` value in [.github/workflows/deploy.yml](.github/workflows/deploy.yml):
-- Project page `thainaviadroski.github.io/<repo>/` → `--base-href /<repo>/`
-- User/root page `thainaviadroski.github.io/` → `--base-href /`
+The base href (`/blog/`) is only set at build time via the `--base-href` flag — it's not hardcoded in `src/index.html`. If the repo name changes, or you move to a user page (`thainaviadroski.github.io`, served at the domain root), update:
+- The `--base-href` value in [.github/workflows/deploy.yml](.github/workflows/deploy.yml):
+  - Project page `thainaviadroski.github.io/<repo>/` → `--base-href /<repo>/`
+  - User/root page `thainaviadroski.github.io/` → `--base-href /`
+- `pathSegmentsToKeep` in [src/404.html](src/404.html) — `1` for a one-segment sub-path like `/blog/`, `0` for a root-served user page.
 
 ## Troubleshooting
 
 - **Blank page / assets 404 after deploy**: usually a base-href mismatch — confirm it matches the actual sub-path the site is served from.
+- **A direct link to a post 404s for real (doesn't recover)**: confirm `dist/my-blog/browser/404.html` exists after a build, and that `pathSegmentsToKeep` in `src/404.html` matches the site's actual sub-path depth.
 - **Workflow fails on the build step**: check that every markdown file under `src/assets/` has `tags:`, `date:` and `description:` lines — the generator script throws if any is missing.
 - **Pages isn't updating**: confirm Settings → Pages → Source is set to "GitHub Actions", and check the Actions tab for the workflow run status.
