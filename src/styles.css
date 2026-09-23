@@ -32,6 +32,11 @@
 	margin: 0px;
 	box-sizing: border-box;
 	font-family: 'Source Code Pro';
+	overflow-wrap: break-word;
+}
+
+html {
+	overflow-x: hidden;
 }
 
 body {

@@ -1,6 +1,17 @@
 <app-header></app-header>
 
 <div class="container">
+	@if (searchTerm) {
+	<div class="search-status">
+		<span>Resultados para "{{searchTerm}}"</span>
+		<a routerLink="/" class="search-clear">Limpar busca ✕</a>
+	</div>
+	}
+
+	@if (pagedPosts.length === 0) {
+	<p class="no-results">Nenhum post encontrado.</p>
+	}
+
 	<div class="wrapper-post">
 		@for (post of pagedPosts; track post.slug) {
 		<app-post [post]="post"></app-post>

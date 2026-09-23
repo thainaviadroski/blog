@@ -5,25 +5,25 @@
     "images": [],
     "slug": "testando-loader",
     "name": "java",
-    "detail": "node-api",
+    "detail": "teste",
     "dir": "assets/java",
     "tags": [
-      "node",
+      "java",
       "programação",
       "oop"
     ],
     "date": "2026-01-10"
   },
   {
-    "title": "Testando Loader.",
+    "title": "Criando uma api com NodeJS.",
     "description": "Post de teste para validar o carregamento de conteúdo do blog.",
     "images": [],
-    "slug": "testando-loader",
-    "name": "java",
-    "detail": "teste",
-    "dir": "assets/java",
+    "slug": "criando-uma-api-com-nodejs",
+    "name": "node",
+    "detail": "node-api",
+    "dir": "assets/node",
     "tags": [
-      "java",
+      "node",
       "programação",
       "oop"
     ],

@@ -3,9 +3,32 @@
 		<div class="brand">
 			<img src="https://placehold.jp/150x50.png" alt="">
 		</div>
-		<nav class="navbar">
-			<a href="" class="link">Home</a>
-			<a href="" class="link">About</a>
+		<button
+			type="button"
+			class="menu-toggle"
+			(click)="toggleMenu()"
+			[attr.aria-expanded]="menuOpen"
+			aria-controls="main-nav"
+			aria-label="Abrir menu"
+		>
+			<span class="menu-toggle-bar"></span>
+			<span class="menu-toggle-bar"></span>
+			<span class="menu-toggle-bar"></span>
+		</button>
+		<form class="search-form" role="search" (submit)="onSearchSubmit($event, searchInput)">
+			<input
+				#searchInput
+				type="search"
+				name="q"
+				[value]="currentSearch"
+				placeholder="Buscar posts..."
+				class="search-input"
+				aria-label="Buscar posts"
+			>
+		</form>
+		<nav class="navbar" id="main-nav" [class.navbar--open]="menuOpen">
+			<a href="" class="link" (click)="closeMenu()">Home</a>
+			<a href="" class="link" (click)="closeMenu()">About</a>
 			<div class="theme-switch">
 				<span class="theme-toggle-icon">🌙</span>
 				<button
