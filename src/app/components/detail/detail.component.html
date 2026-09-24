@@ -8,7 +8,7 @@
 	<img class="post-cover" [src]="post.dir + '/' + post.img" [alt]="post.title">
 	}
 	<div class="content" [innerHTML]="html"></div>
-	<div class="post-date">{{post.date}}</div>
+	<div class="post-date"> <b>Publicado em:</b> {{post.date | date:'dd/MM/yyyy HH:mm'}}</div>
 	<div class="post-tags-wrapper">
 		@for (tag of post.tags; track $index) {
 		<span class="post-tags">{{tag}}</span>

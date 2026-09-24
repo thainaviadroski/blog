@@ -5,11 +5,12 @@ import { switchMap } from 'rxjs/operators';
 import { ContentLoaderServiceService } from '../../service/content-loader-service.service';
 import { HeaderComponent } from '../header/header.component';
 import { Content } from '../../types/Content.model';
+import { DatePipe } from '@angular/common';
 
 @Component({
 	selector: 'app-detail',
 	standalone: true,
-	imports: [HeaderComponent],
+	imports: [HeaderComponent, DatePipe],
 	templateUrl: './detail.component.html',
 	styleUrl: './detail.component.css'
 })

@@ -1,10 +1,10 @@
-.container{
+.container {
 	max-width: 800px;
 	margin: 10px auto;
 	padding: 0 16px;
 }
 
-.post-cover{
+.post-cover {
 	width: 100%;
 	max-height: 400px;
 	object-fit: cover;
@@ -12,13 +12,15 @@
 	margin-top: 12px;
 }
 
-.post-date{
+.post-date {
+	border-top: 1px solid var(--muted-color);
+	padding-top: 12px;
 	color: var(--muted-color);
 	font-size: 0.9em;
 	margin-top: 12px;
 }
 
-.post-tags-wrapper{
+.post-tags-wrapper {
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
@@ -26,18 +28,14 @@
 	margin: 12px 0;
 }
 
-.post-tags{
+.post-tags {
 	border-radius: 10px;
 	background-color: var(--tag-bg);
 	color: var(--tag-color);
 	padding: 8px;
 }
 
-.content{
-	line-height: 1.6;
-}
-
-.not-found{
+.not-found {
 	text-align: center;
 	margin-top: 40px;
 }

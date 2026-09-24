@@ -1,12 +1,12 @@
 [
   {
-    "title": "Testando Loader.",
-    "description": "Post de teste para validar o carregamento de conteúdo do blog.",
+    "title": "Hello World.",
+    "description": "",
     "images": [],
-    "slug": "testando-loader",
-    "name": "java",
-    "detail": "teste",
-    "dir": "assets/java",
+    "slug": "hello-world",
+    "name": ".",
+    "detail": "hello-world",
+    "dir": "assets/.",
     "tags": [
       "java",
       "programação",
