@@ -3,7 +3,7 @@
 
 description: Construção de sistemas com a orientação a objetos
 tags: arquitetura de software, programação, oop
-date: 2026-09-23 23:00:00
+date: 2026-09-24 0745:37
 
 ## Origem do POO
 
@@ -94,18 +94,13 @@ Abstração é o princípio da Programação Orientada a Objetos que consiste em
 
 Exemplo de abstração de objeto usando pseudocódigo:
 
-```text  
-
-classe Produto{
-	texto marca; 
-	texto modelo;
-	texto descricao; 
-	decimal peso;
-	
+```pseudo
+classe Produto {
+	var marca: Caractere;
+	var modelo: Caractere;
+	var descricao: Caractere;
+	var peso: Real;
 }
-
-
-
 ```
 
 Exemplo de abstração utilizando a linguagem Java:
