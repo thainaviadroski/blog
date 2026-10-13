@@ -1,29 +1,36 @@
 /* You can add global styles to this file, and also import other style files */
 @import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
+/* Palette derived from the brand mark (src/brand.svg): #3880d0 fill, #2662b8 outline. */
 :root {
+	--brand-color: #3880d0;
+	--brand-color-dark: #2662b8;
 	--bg-color: #ffffff;
-	--text-color: #181818;
-	--header-bg: #eeeeee;
-	--link-color: #353535;
-	--link-hover-color: #181818;
-	--border-color: #747474;
-	--muted-color: #747474;
-	--tag-bg: #525252;
+	--text-color: #172231;
+	--header-bg: #eaf2fb;
+	--link-color: #2662b8;
+	--link-hover-color: #1b4a8f;
+	--border-color: #6b7f99;
+	--muted-color: #5c6b7f;
+	--tag-bg: #2662b8;
 	--tag-color: #ffffff;
-	--card-shadow: 0 0 10px #74747455;
+	--code-bg: #1f2b3b;
+	--code-color: #e6edf5;
+	--card-shadow: 0 0 10px #2662b833;
 }
 
 :root[data-theme="dark"] {
-	--bg-color: #121212;
-	--text-color: #e4e4e4;
-	--header-bg: #1e1e1e;
-	--link-color: #e4e4e4;
-	--link-hover-color: #ffffff;
-	--border-color: #444444;
-	--muted-color: #a0a0a0;
-	--tag-bg: #333333;
-	--tag-color: #e4e4e4;
+	--bg-color: #0f141b;
+	--text-color: #e4e9f0;
+	--header-bg: #172030;
+	--link-color: #6aa3e3;
+	--link-hover-color: #a3c6ef;
+	--border-color: #50647e;
+	--muted-color: #9aa8ba;
+	--tag-bg: #2662b8;
+	--tag-color: #ffffff;
+	--code-bg: #1c2635;
+	--code-color: #e4e9f0;
 	--card-shadow: 0 0 10px #00000088;
 }
 
@@ -88,12 +95,12 @@ body {
 }
 
 .content a {
-	color: var(--link-hover-color);
+	color: var(--link-color);
 	text-decoration: underline;
 }
 
 .content a:hover {
-	color: var(--muted-color);
+	color: var(--link-hover-color);
 }
 
 .content ul,
@@ -115,16 +122,16 @@ body {
 }
 
 .content code {
-	background-color: var(--tag-bg);
-	color: var(--tag-color);
+	background-color: var(--code-bg);
+	color: var(--code-color);
 	padding: 2px 6px;
 	border-radius: 4px;
 	font-size: 0.9em;
 }
 
 .content pre {
-	background-color: var(--tag-bg);
-	color: var(--tag-color);
+	background-color: var(--code-bg);
+	color: var(--code-color);
 	padding: 16px;
 	border-radius: 8px;
 	overflow-x: auto;

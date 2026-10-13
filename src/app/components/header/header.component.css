@@ -1,5 +1,6 @@
 .header {
 	background-color: var(--header-bg);
+	border-bottom: 3px solid var(--brand-color);
 	padding: 16px;
 	transition: background-color 0.2s ease;
 }
@@ -13,9 +14,19 @@
 	flex-wrap: wrap;
 }
 
+.brand {
+	display: block;
+	flex-shrink: 0;
+}
+
+.brand:focus-visible {
+	outline: 2px solid var(--link-hover-color);
+	outline-offset: 2px;
+}
+
 .brand img {
-	max-width: 100%;
-	height: auto;
+	width: auto;
+	height: 40px;
 	display: block;
 }
 
