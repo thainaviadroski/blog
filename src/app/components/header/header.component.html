@@ -1,48 +1,45 @@
-<header class="header">
-	<div class="container-fluid">
-		<a href="" class="brand" (click)="closeMenu()">
-			<img src="brand.svg" alt="Página inicial" width="36" height="40">
+<header class="site-header">
+	<div class="container header-inner">
+		<a class="logo" routerLink="/">
+			<img class="logo-mark" src="brand.svg" alt="" width="24" height="27">
+			<span><span class="logo-prompt">~/</span>thaina/blog</span>
 		</a>
+		<div class="header-tools">
+			<nav aria-label="Navegação principal">
+				<ul class="nav-list">
+					<li><a routerLink="/">home</a></li>
+					<li><a class="nav-external" href="https://thainaviadroski.github.io/#sobre">sobre<span aria-hidden="true"> ↗</span></a></li>
+				</ul>
+			</nav>
+			<form class="search-form" role="search" (submit)="onSearchSubmit($event, searchInput)">
+				<input
+					#searchInput
+					type="search"
+					name="q"
+					[value]="currentSearch"
+					placeholder="buscar posts..."
+					class="search-input"
+					aria-label="Buscar posts"
+				>
+			</form>
+		</div>
 		<button
 			type="button"
-			class="menu-toggle"
-			(click)="toggleMenu()"
-			[attr.aria-expanded]="menuOpen"
-			aria-controls="main-nav"
-			aria-label="Abrir menu"
+			class="theme-toggle"
+			role="switch"
+			[attr.aria-checked]="themeService.theme() === 'dark'"
+			(click)="themeService.toggle()"
+			aria-label="Tema escuro"
+			title="Alternar tema claro/escuro"
 		>
-			<span class="menu-toggle-bar"></span>
-			<span class="menu-toggle-bar"></span>
-			<span class="menu-toggle-bar"></span>
+			<span class="theme-toggle-thumb" aria-hidden="true"></span>
+			<svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
+				<circle cx="12" cy="12" r="4" />
+				<path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41" />
+			</svg>
+			<svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true">
+				<path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8Z" />
+			</svg>
 		</button>
-		<form class="search-form" role="search" (submit)="onSearchSubmit($event, searchInput)">
-			<input
-				#searchInput
-				type="search"
-				name="q"
-				[value]="currentSearch"
-				placeholder="Buscar posts..."
-				class="search-input"
-				aria-label="Buscar posts"
-			>
-		</form>
-		<nav class="navbar" id="main-nav" [class.navbar--open]="menuOpen">
-			<a href="" class="link" (click)="closeMenu()">Home</a>
-			<a href="" class="link" (click)="closeMenu()">About</a>
-			<div class="theme-switch">
-				<span class="theme-toggle-icon">🌙</span>
-				<button
-					type="button"
-					class="theme-toggle"
-					role="switch"
-					[attr.aria-checked]="themeService.theme() === 'dark'"
-					(click)="themeService.toggle()"
-					[attr.aria-label]="themeService.theme() === 'dark' ? 'Ativar modo claro' : 'Ativar modo escuro'"
-				>
-					<span class="theme-toggle-knob" [class.theme-toggle-knob--light]="themeService.theme() === 'light'"></span>
-				</button>
-				<span class="theme-toggle-icon">☀️</span>
-			</div>
-		</nav>
 	</div>
 </header>

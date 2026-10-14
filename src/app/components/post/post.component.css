@@ -1,53 +1,66 @@
-.post-wrapper{
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    display: flex;
-    flex-direction: column;
-	max-width: 100%;
-	padding: 12px;
-	gap: 16px;
-	box-shadow: var(--card-shadow);
+/* Same card as the portfolio's project cards */
+.post-wrapper {
+	display: flex;
+	flex-direction: column;
+	gap: 0.75rem;
+	padding: 1.25rem;
+	background: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	transition: border-color 0.15s ease, transform 0.15s ease;
 }
 
-.post-thumb{
+.post-wrapper:hover {
+	border-color: var(--brand);
+	transform: translateY(-2px);
+}
+
+.post-thumb {
+	display: block;
 	width: 100%;
 	max-height: 220px;
 	object-fit: cover;
-	border-radius: 8px;
+	border-radius: var(--radius);
 }
 
-.post-title{
-	border-bottom: 1px solid;
+.post-date {
+	color: var(--muted);
+	font-size: 0.75rem;
 }
 
-.post-link{
+.post-link {
+	color: var(--text);
 	text-decoration: none;
-	color: inherit;
 }
 
-.post-date{
-	color: var(--muted-color);
-	font-size: 0.9em;
+.post-title {
+	font-size: 1.15rem;
+	font-weight: 600;
+	transition: color 0.15s ease;
 }
 
-.post-read-more{
+.post-wrapper:hover .post-title {
+	color: var(--accent);
+}
+
+.post-abstract {
+	color: var(--muted);
+	font-size: 0.875rem;
+}
+
+.post-read-more {
 	align-self: flex-start;
-	color: inherit;
-	font-weight: bold;
+	font-size: 0.875rem;
+	font-weight: 500;
 	text-decoration: none;
 }
 
-.post-tags-wrapper{
-	display:flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	gap: 12px;
-	margin-top: 16px;
+.post-read-more:hover {
+	text-decoration: underline;
 }
 
-.post-tags{
-	border-radius: 10px;
-	background-color: var(--tag-bg);
-	color: var(--tag-color);
-	padding: 8px;
+@media (prefers-reduced-motion: reduce) {
+	.post-wrapper:hover {
+		transform: none;
+	}
 }

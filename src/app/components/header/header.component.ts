@@ -1,11 +1,11 @@
 import { Component, inject } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { ThemeService } from '../../service/theme.service';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css'
 })
@@ -15,15 +15,6 @@ export class HeaderComponent {
   private route = inject(ActivatedRoute);
 
   currentSearch = '';
-  menuOpen = false;
-
-  toggleMenu(): void {
-    this.menuOpen = !this.menuOpen;
-  }
-
-  closeMenu(): void {
-    this.menuOpen = false;
-  }
 
   constructor() {
     this.route.queryParamMap.subscribe(params => {

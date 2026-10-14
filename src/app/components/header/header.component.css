@@ -1,160 +1,189 @@
-.header {
-	background-color: var(--header-bg);
-	border-bottom: 3px solid var(--brand-color);
-	padding: 16px;
-	transition: background-color 0.2s ease;
+/* Mirrors the portfolio's header (thainaviadroski.github.io/style.css) */
+.site-header {
+	position: sticky;
+	top: 0;
+	z-index: 10;
+	background: var(--bg);
+	border-bottom: 1px solid var(--border);
 }
 
-.container-fluid {
+.header-inner {
 	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
 	align-items: center;
-	gap: 16px;
-	flex-wrap: wrap;
+	gap: 1rem 1.5rem;
+	min-height: 64px;
 }
 
-.brand {
+.logo {
+	display: inline-flex;
+	align-items: center;
+	gap: 0.6rem;
+	margin-right: auto;
+	color: var(--text);
+	font-weight: 700;
+	font-size: 1.05rem;
+	text-decoration: none;
+}
+
+.logo-mark {
 	display: block;
 	flex-shrink: 0;
 }
 
-.brand:focus-visible {
-	outline: 2px solid var(--link-hover-color);
-	outline-offset: 2px;
+.logo-prompt {
+	color: var(--accent);
 }
 
-.brand img {
-	width: auto;
-	height: 40px;
-	display: block;
+.header-tools {
+	display: flex;
+	align-items: center;
+	gap: 1rem 1.5rem;
 }
 
-.menu-toggle {
-	display: none;
-	flex-direction: column;
-	justify-content: center;
-	gap: 5px;
-	width: 28px;
-	height: 22px;
-	padding: 0;
-	background: transparent;
-	border: none;
-	cursor: pointer;
+.nav-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.25rem 1.5rem;
+	list-style: none;
 }
 
-.menu-toggle-bar {
-	display: block;
-	height: 3px;
-	border-radius: 2px;
-	background-color: var(--link-color);
+.nav-list a {
+	color: var(--muted);
+	font-size: 0.875rem;
+	text-decoration: none;
+	transition: color 0.15s ease;
 }
 
-.menu-toggle:focus-visible {
-	outline: 2px solid var(--link-hover-color);
-	outline-offset: 2px;
+.nav-list a:hover,
+.nav-list .nav-external {
+	color: var(--accent);
+}
+
+.nav-list .nav-external:hover {
+	text-decoration: underline;
 }
 
 .search-form {
-	flex: 1;
-	min-width: 160px;
-	max-width: 320px;
+	width: 220px;
 }
 
 .search-input {
 	width: 100%;
-	padding: 8px 12px;
-	border-radius: 999px;
-	border: 1px solid var(--border-color);
-	background: var(--bg-color);
-	color: var(--text-color);
-	font-family: inherit;
-	font-size: 14px;
+	padding: 0.4rem 0.75rem;
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	background: var(--surface);
+	color: var(--text);
+	font-size: 0.8125rem;
+	transition: border-color 0.15s ease;
 }
 
-.search-input:focus-visible {
-	outline: 2px solid var(--link-hover-color);
-	outline-offset: 2px;
+.search-input::placeholder {
+	color: var(--muted);
 }
 
-
-.navbar {
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	gap: 12px;
+.search-input:hover,
+.search-input:focus {
+	border-color: var(--brand);
 }
 
-.link {
-	font-size: 18px;
-	text-decoration: none;
-	color: var(--link-color);
-
-}
-
-.link:hover {
-	color: var(--link-hover-color);
-}
-
-.theme-switch {
-	display: inline-flex;
-	align-items: center;
-	gap: 8px;
-	flex-shrink: 0;
-}
-
-.theme-toggle-icon {
-	font-size: 14px;
-	line-height: 1;
-}
-
+/* Theme toggle: sun on the left (light), moon on the right (dark).
+   The thumb slides to the active theme's side and the icon over it is highlighted. */
 .theme-toggle {
 	position: relative;
-	width: 44px;
-	height: 24px;
-	padding: 0;
-	border-radius: 999px;
-	border: 1px solid var(--border-color);
-	background: var(--bg-color);
-	cursor: pointer;
 	flex-shrink: 0;
+	width: 52px;
+	height: 28px;
+	border: 1px solid var(--border);
+	border-radius: 999px;
+	background: var(--surface);
+	cursor: pointer;
+	transition: border-color 0.15s ease;
+}
+
+.theme-toggle:hover {
+	border-color: var(--brand);
 }
 
 .theme-toggle:focus-visible {
-	outline: 2px solid var(--link-hover-color);
-	outline-offset: 2px;
+	border-radius: 999px;
 }
 
-.theme-toggle-knob {
+.theme-toggle-thumb {
 	position: absolute;
 	top: 2px;
 	left: 2px;
-	width: 18px;
-	height: 18px;
+	width: 22px;
+	height: 22px;
 	border-radius: 50%;
-	background-color: var(--tag-bg);
-	box-shadow: 0 1px 3px #00000055;
+	background: var(--accent);
 	transition: transform 0.2s ease;
 }
 
-.theme-toggle-knob--light {
-	transform: translateX(20px);
+.theme-toggle svg {
+	position: absolute;
+	top: 6px;
+	width: 14px;
+	height: 14px;
+	fill: none;
+	stroke: var(--muted);
+	stroke-width: 2;
+	stroke-linecap: round;
+	stroke-linejoin: round;
+	transition: stroke 0.2s ease;
 }
 
-@media (max-width: 720px) {
-	.menu-toggle {
-		display: flex;
+.theme-toggle .icon-sun {
+	left: 6px;
+	stroke: var(--accent-contrast);
+}
+
+.theme-toggle .icon-moon {
+	left: 30px;
+}
+
+.theme-toggle[aria-checked="true"] .theme-toggle-thumb {
+	transform: translateX(24px);
+}
+
+.theme-toggle[aria-checked="true"] .icon-sun {
+	stroke: var(--muted);
+}
+
+.theme-toggle[aria-checked="true"] .icon-moon {
+	stroke: var(--accent-contrast);
+}
+
+@media (max-width: 640px) {
+	/* Not sticky on phones so it doesn't take over the screen */
+	.site-header {
+		position: static;
 	}
 
-	.navbar {
-		display: none;
-		flex-direction: column;
-		align-items: flex-start;
-		width: 100%;
-		gap: 16px;
+	/* Logo and theme toggle on the first row; nav and search below */
+	.header-inner {
+		flex-wrap: wrap;
+		gap: 0.75rem 1rem;
+		padding-block: 0.9rem;
 	}
 
-	.navbar--open {
-		display: flex;
+	.header-tools {
+		order: 3;
+		flex-basis: 100%;
+		gap: 0.75rem 1.1rem;
+	}
+
+	.nav-list {
+		gap: 0.25rem 1.1rem;
+	}
+
+	.nav-list a {
+		font-size: 0.8125rem;
+	}
+
+	.search-form {
+		flex: 1;
+		width: auto;
+		min-width: 0;
 	}
 }

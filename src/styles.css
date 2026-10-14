@@ -1,61 +1,127 @@
 /* You can add global styles to this file, and also import other style files */
-@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 
-/* Palette derived from the brand mark (src/brand.svg): #3880d0 fill, #2662b8 outline. */
+/*
+ * Tokens shared with the portfolio (thainaviadroski.github.io/style.css) so both
+ * sites have the same visual identity. Keep the names and values in sync there.
+ * Palette from the brand mark (src/brand.svg): blue #3880d0, dark blue #2662b8, white.
+ * --brand is the logo blue, for decorative details (borders, focus, markers).
+ * --accent is the variant with enough contrast for text in each theme.
+ */
 :root {
-	--brand-color: #3880d0;
-	--brand-color-dark: #2662b8;
-	--bg-color: #ffffff;
-	--text-color: #172231;
-	--header-bg: #eaf2fb;
-	--link-color: #2662b8;
-	--link-hover-color: #1b4a8f;
-	--border-color: #6b7f99;
-	--muted-color: #5c6b7f;
-	--tag-bg: #2662b8;
-	--tag-color: #ffffff;
-	--code-bg: #1f2b3b;
-	--code-color: #e6edf5;
-	--card-shadow: 0 0 10px #2662b833;
+	color-scheme: light;
+
+	--bg: #f4f7fb;
+	--surface: #ffffff;
+	--text: #172133;
+	--muted: #56637a;
+	--border: #dce3ee;
+	--brand: #3880d0;
+	--accent: #2662b8;
+	--accent-contrast: #ffffff;
+	--accent-soft: #e2ecf9;
+
+	--font: "Fira Code", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+	--radius: 8px;
+	--container: 960px;
+}
+
+/* Dark theme follows the system unless light was picked in the toggle.
+   The same values repeat under [data-theme="dark"] for the manual choice. */
+@media (prefers-color-scheme: dark) {
+	:root:not([data-theme="light"]) {
+		color-scheme: dark;
+
+		--bg: #0c121c;
+		--surface: #131b28;
+		--text: #e3e9f2;
+		--muted: #93a1b5;
+		--border: #233044;
+		--brand: #3880d0;
+		--accent: #5b9ae3;
+		--accent-contrast: #0c121c;
+		--accent-soft: #172a45;
+	}
 }
 
 :root[data-theme="dark"] {
-	--bg-color: #0f141b;
-	--text-color: #e4e9f0;
-	--header-bg: #172030;
-	--link-color: #6aa3e3;
-	--link-hover-color: #a3c6ef;
-	--border-color: #50647e;
-	--muted-color: #9aa8ba;
-	--tag-bg: #2662b8;
-	--tag-color: #ffffff;
-	--code-bg: #1c2635;
-	--code-color: #e4e9f0;
-	--card-shadow: 0 0 10px #00000088;
+	color-scheme: dark;
+
+	--bg: #0c121c;
+	--surface: #131b28;
+	--text: #e3e9f2;
+	--muted: #93a1b5;
+	--border: #233044;
+	--brand: #3880d0;
+	--accent: #5b9ae3;
+	--accent-contrast: #0c121c;
+	--accent-soft: #172a45;
 }
 
 * {
 	padding: 0px;
 	margin: 0px;
 	box-sizing: border-box;
-	font-family: 'Source Code Pro';
+	font-family: var(--font);
 	overflow-wrap: break-word;
 }
 
 html {
 	overflow-x: hidden;
+	-webkit-text-size-adjust: 100%;
 }
 
 body {
-	background-color: var(--bg-color);
-	color: var(--text-color);
-	transition: background-color 0.2s ease, color 0.2s ease;
+	background-color: var(--bg);
+	color: var(--text);
+	font-size: 0.9375rem;
+	line-height: 1.7;
+	-webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+	line-height: 1.25;
+	text-wrap: balance;
+}
+
+a {
+	color: var(--accent);
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible {
+	outline: 2px solid var(--brand);
+	outline-offset: 3px;
+	border-radius: 4px;
+}
+
+::selection {
+	background: var(--accent);
+	color: var(--accent-contrast);
 }
 
 .container {
-	max-width: 1200px;
-	width: 100%;
-	margin: auto;
+	width: min(100% - 2rem, var(--container));
+	margin-inline: auto;
+}
+
+/* Tag chips, used by the post list and the article page */
+.tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	list-style: none;
+}
+
+.tags li {
+	padding: 0.25rem 0.65rem;
+	background: var(--bg);
+	border: 1px solid var(--border);
+	border-radius: 4px;
+	font-size: 0.8125rem;
+	line-height: 1.5;
 }
 
 /*
@@ -68,7 +134,7 @@ body {
  * silently wouldn't match it.
  */
 .content {
-	line-height: 1.6;
+	line-height: 1.7;
 }
 
 .content > *:first-child {
@@ -81,79 +147,96 @@ body {
 .content h4,
 .content h5,
 .content h6 {
-	margin: 28px 0 12px;
-	line-height: 1.3;
+	margin: 2rem 0 0.9rem;
+	font-weight: 600;
 }
 
-.content h1 { font-size: 1.8em; }
-.content h2 { font-size: 1.5em; }
-.content h3 { font-size: 1.25em; }
-.content h4 { font-size: 1.1em; }
+.content h1 {
+	font-size: clamp(1.6rem, 4.5vw, 2.25rem);
+	font-weight: 700;
+	letter-spacing: -0.02em;
+}
+
+.content h2 { font-size: clamp(1.3rem, 3vw, 1.65rem); }
+.content h3 { font-size: 1.15rem; }
+.content h4 { font-size: 1rem; }
 
 .content p {
-	margin: 12px 0;
+	margin: 0.9rem 0;
 }
 
 .content a {
-	color: var(--link-color);
-	text-decoration: underline;
+	color: var(--accent);
+	text-underline-offset: 3px;
 }
 
 .content a:hover {
-	color: var(--link-hover-color);
+	text-decoration-color: var(--brand);
+}
+
+.content strong {
+	font-weight: 600;
 }
 
 .content ul,
 .content ol {
-	margin: 12px 0;
-	padding-left: 24px;
+	margin: 0.9rem 0;
+	padding-left: 1.5rem;
 }
 
 .content li {
-	margin: 4px 0;
+	margin: 0.35rem 0;
+}
+
+.content li::marker {
+	color: var(--brand);
 }
 
 .content blockquote {
-	margin: 16px 0;
-	padding: 4px 16px;
-	border-left: 4px solid var(--border-color);
-	color: var(--muted-color);
-	font-style: italic;
+	margin: 1.25rem 0;
+	padding: 0.25rem 1rem;
+	border-left: 3px solid var(--brand);
+	color: var(--muted);
 }
 
 .content code {
-	background-color: var(--code-bg);
-	color: var(--code-color);
-	padding: 2px 6px;
+	background-color: var(--accent-soft);
+	color: var(--text);
+	padding: 0.1em 0.35em;
 	border-radius: 4px;
-	font-size: 0.9em;
+	font-size: 0.875em;
 }
 
+/* Code blocks use the same card look as the portfolio's code card */
 .content pre {
-	background-color: var(--code-bg);
-	color: var(--code-color);
-	padding: 16px;
-	border-radius: 8px;
+	margin: 1.25rem 0;
+	padding: 1.25rem;
 	overflow-x: auto;
-	margin: 16px 0;
+	background-color: var(--surface);
+	border: 1px solid var(--border);
+	border-radius: var(--radius);
+	font-size: 0.8125rem;
+	line-height: 1.75;
 }
 
 .content pre code {
 	background: none;
 	padding: 0;
+	border-radius: 0;
+	font-size: inherit;
 }
 
 .content img {
 	max-width: 100%;
 	height: auto;
-	border-radius: 8px;
-	margin: 12px 0;
+	border-radius: var(--radius);
+	margin: 0.9rem 0;
 }
 
 .content hr {
 	border: none;
-	border-top: 1px solid var(--border-color);
-	margin: 24px 0;
+	border-top: 1px solid var(--border);
+	margin: 2rem 0;
 }
 
 .content table {
@@ -161,16 +244,33 @@ body {
 	width: 100%;
 	overflow-x: auto;
 	border-collapse: collapse;
-	margin: 16px 0;
+	margin: 1.25rem 0;
+	font-size: 0.875rem;
 }
 
 .content th,
 .content td {
-	border: 1px solid var(--border-color);
-	padding: 8px 12px;
+	border: 1px solid var(--border);
+	padding: 0.5rem 0.75rem;
 	text-align: left;
 }
 
 .content th {
-	background-color: var(--header-bg);
+	background-color: var(--surface);
+	font-weight: 600;
+}
+
+@media (max-width: 640px) {
+	body {
+		font-size: 0.875rem;
+	}
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation: none !important;
+		transition: none !important;
+	}
 }

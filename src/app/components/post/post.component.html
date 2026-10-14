@@ -4,25 +4,23 @@
 		<img class="post-thumb" [src]="post?.dir + '/' + post?.img" [alt]="post?.title">
 	</a>
 	}
+	<div class="post-date">
+		{{post?.date}}
+	</div>
 	<a class="post-link" [routerLink]="['/post', post?.slug]">
 		<h1 class="post-title">
 			{{post?.title}}
 		</h1>
 	</a>
-	<div class="post-date">
-		{{post?.date}}
-	</div>
-	<div class="post-abstract">
-		<p>
-			{{post?.description}}
-		</p>
-	</div>
-	<div class="post-tags-wrapper">
+	@if (post?.description) {
+	<p class="post-abstract">
+		{{post?.description}}
+	</p>
+	}
+	<ul class="tags">
 		@for (tag of post?.tags; track $index) {
-		<span class="post-tags">
-			{{tag}}
-		</span>
+		<li>{{tag}}</li>
 		}
-	</div>
+	</ul>
 	<a class="post-read-more" [routerLink]="['/post', post?.slug]">Ler mais →</a>
 </div>

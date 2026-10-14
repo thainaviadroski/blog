@@ -1,12 +1,27 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="utf-8">
-  <title>MyBlog</title>
+  <title>Blog — Thainã Viadroski</title>
   <base href="/">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f7fb" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#0c121c" media="(prefers-color-scheme: dark)">
   <link rel="icon" type="image/x-icon" href="icon.ico" sizes="any">
   <link rel="icon" type="image/svg+xml" href="brand.svg">
+
+  <!-- Applies the saved theme before rendering to avoid a flash of the wrong colours
+       (same as the portfolio; see ThemeService) -->
+  <script>
+    try {
+      const theme = localStorage.getItem("theme");
+      if (theme === "light" || theme === "dark") document.documentElement.dataset.theme = theme;
+    } catch { }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300..700&display=swap" rel="stylesheet">
   <script type="text/javascript">
     // Single Page Apps for GitHub Pages
     // MIT License — https://github.com/rafgraph/spa-github-pages

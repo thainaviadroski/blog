@@ -9,11 +9,11 @@
 	}
 	<div class="content" [innerHTML]="html"></div>
 	<div class="post-date"> <b>Publicado em:</b> {{post.date | date:'dd/MM/yyyy HH:mm'}}</div>
-	<div class="post-tags-wrapper">
+	<ul class="tags">
 		@for (tag of post.tags; track $index) {
-		<span class="post-tags">{{tag}}</span>
+		<li>{{tag}}</li>
 		}
-	</div>
+	</ul>
 
 	}
 </div>

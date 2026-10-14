@@ -1,32 +1,17 @@
 [
   {
-    "title": "Hello World.",
-    "description": "",
+    "title": "Orientação a Objetos",
+    "description": "Construção de sistemas com a orientação a objetos",
     "images": [],
-    "slug": "hello-world",
-    "name": ".",
-    "detail": "hello-world",
-    "dir": "assets/.",
+    "slug": "orientao-a-objetos",
+    "name": "engenharia-software",
+    "detail": "orientacao-a-objetos",
+    "dir": "assets/engenharia-software",
     "tags": [
-      "java",
+      "arquitetura de software",
       "programação",
       "oop"
     ],
-    "date": "2026-01-10"
-  },
-  {
-    "title": "Criando uma api com NodeJS.",
-    "description": "Post de teste para validar o carregamento de conteúdo do blog.",
-    "images": [],
-    "slug": "criando-uma-api-com-nodejs",
-    "name": "node",
-    "detail": "node-api",
-    "dir": "assets/node",
-    "tags": [
-      "node",
-      "programação",
-      "oop"
-    ],
-    "date": "2026-01-10"
+    "date": "2026-09-24 0745:37"
   }
 ]
